@@ -17,9 +17,14 @@ try:
         a.close()
 except FileNotFoundError:
     letter1 = None
-print(letter1)
+    print("failure: old.txt not recognized")
 
-#wirte to txt files
-b = [1,2,3,4]
-with open("new.txt" ,"x") as b:
-    b.write(letter1)
+#tries to open file ("new.txt") in write mode ("W")
+try:
+    with open("new.txt" ,"w") as b:
+        b.write(letter1)
+#if trie failed due to an occuring error it triggers the next except command (e.g. here in the next line)
+except:
+    with open("new.txt" ,"x") as b:
+        b.write(letter1)
+print("everything should have went well")
