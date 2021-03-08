@@ -36,12 +36,14 @@ def pick_shortest():
 
 def update_discovered(shortest_path):
     for edge in graph1.edges:
-        if shortest_path.to == edge.from: #found outgoing edge of newly entered node
-            path_to = False
+        A = edge.from
+        B = edge.to
+        if shortest_path.to == A: #found outgoing edge of newly entered node
+            a_path_to_B_exists = False
             for discovered_path in discovered:
-                if edge.to == discovered_path.to:
-                    path_to = True
-                    if discovered_path.cost > shortest_path.cost+edge.cost:
-                        discovered_path = djikstra_tuple(edge.to, shortest_path.cost+edge.cost, edge.from)
-            if not(path_to):
-                discovered.append(djikstra_tuple(edge.to, shortest_path.cost+edge.cost, edge.from))
+                if B == discovered_path.to:
+                    a_path_to_B_exists = True
+                    if discovered_path.cost > shortest_path.cost+edge.cost: # if path over newly entered node is cheapter/shorter replace the entry in discovered_path
+                        discovered_path = djikstra_tuple(B, shortest_path.cost+edge.cost, A)
+            if not(a_path_to_B_exists):
+                discovered.append(djikstra_tuple(B, shortest_path.cost+edge.cost, A))
