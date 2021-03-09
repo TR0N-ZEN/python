@@ -1,7 +1,7 @@
 class Edge:
-    def __init__(self, from, to, cost):
-        self.from = from
-        self.to = to
+    def __init__(self, start, end, cost):
+        self.start = start
+        self.end = end
         self.cost = cost
 class Graph:
     def __init__(self):
