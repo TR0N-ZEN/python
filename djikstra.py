@@ -19,38 +19,40 @@ class djikstra_tuple:
                 string += djikstra_tuple.toString(tupel)
             return string
 
-def pick_shortest(already_discovered_paths): # no sideeffects
+def A_has_path_in_B(node, paths): # no sideeffects
+    for path in paths:
+        if path.to == node:
+            return True
+    return False
+
+def find_shortcut(edge, new_shortest_path, already_discovered_paths):
+    if edge.start == new_shortest_path.to: #found outgoing edge of newly shortest_paths node
+        if not(A_has_path_in_B(edge.end, already_discovered_paths)):
+            already_discovered_paths.append(djikstra_tuple(edge.end, new_shortest_path.cost+edge.cost, edge.start))
+        else:
+            for already_discovered_path in already_discovered_paths:
+                if already_discovered_path.to == edge.end: #is there a path which has the same end as edge.end?
+                    if already_discovered_path.cost > new_shortest_path.cost + edge.cost: # path over newly shortest_paths node is cheapter/shorter
+                        already_discovered_path.predecessor = edge.start
+                        already_discovered_path.cost = new_shortest_path.cost + edge.cost
+
+
+def pick_shortest_path(already_discovered_paths): # no sideeffects
     shortest_path = djikstra_tuple("None", math.inf, "None")
     for path in already_discovered_paths:
         if path.cost < shortest_path.cost:
             shortest_path = path
     return shortest_path
 
-def has_shortest_path(node, shortest_paths): # no sideeffects
-    for path in shortest_paths:
-        if path.to == node:
-            return True
-    return False
-
 def update_discovered(graph, shortest_paths, already_discovered_paths): #sideeffects
-    print("already_discovered_paths(before): "+djikstra_tuple.list_toString(already_discovered_paths))
+    #print("already_discovered_paths(before): "+djikstra_tuple.list_toString(already_discovered_paths))
     new_shortest_path = shortest_paths[-1]
     print("shortest_path: "+djikstra_tuple.toString(new_shortest_path))
-    already_discovered_paths.remove(new_shortest_path)
-    for edge in graph.edges:
-        # A = edge.start
-        # B = edge.end
-        if not(has_shortest_path(edge.end, shortest_paths)) and edge.start == new_shortest_path.to: #found outgoing edge of newly shortest_paths node
-            a_path_to_B_exists_already = False #for each connection A-B, B is the other node of that connection
-            for already_discovered_path in already_discovered_paths:
-                if already_discovered_path.to == edge.end: #is there a path which has the same end as edge.end?
-                    a_path_to_B_exists_already = True #there is
-                    if already_discovered_path.cost > new_shortest_path.cost + edge.cost: # path over newly shortest_paths node is cheapter/shorter
-                        already_discovered_path.predecessor = edge.start
-                        already_discovered_path.cost = new_shortest_path.cost + edge.cost
-            if not(a_path_to_B_exists_already): #has there been not already_discovered_paths path with an end at edge.end?
-                already_discovered_paths.append(djikstra_tuple(edge.end, new_shortest_path.cost+edge.cost, edge.start))
-    print("already_discovered_paths(after): "+djikstra_tuple.list_toString(already_discovered_paths))
+    already_discovered_paths.remove(new_shortest_path) #removing from already_discovered
+    for edge in graph.edges: #edge in the following indented block of code is a varaible since it takes several different values which are those contained in graph.edges
+        if not(A_has_path_in_B(edge.end, shortest_paths)):
+            find_shortcut(edge, new_shortest_path, already_discovered_paths)
+    print("already_discovered_paths: "+djikstra_tuple.list_toString(already_discovered_paths))
 
 def djikstra(start_node, graph):
     shortest_paths = [] #contains djikstra_tuples
@@ -58,7 +60,7 @@ def djikstra(start_node, graph):
     start_path = djikstra_tuple(start_node, 0, "None")
     already_discovered_paths.append(start_path)
     while len(already_discovered_paths) > 0:
-        shortest_paths.append(pick_shortest(already_discovered_paths))
+        shortest_paths.append(pick_shortest_path(already_discovered_paths))
         update_discovered(graph, shortest_paths, already_discovered_paths)
     return shortest_paths
 
