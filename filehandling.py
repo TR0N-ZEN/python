@@ -1,21 +1,13 @@
-tree = "master"
-version = "1.0"
-author = "TR0N"
-print("tree:" + tree)
-print("version:" + version)
-print("by" + author)
-print("#################################################################################################################################################################################################################")
-
 #f = open("old.txt")
 #text = f.read()
 #f.close()
 #print(text)
 
 try:
-    with open("old.txt","r",) as a:
-        letter1=a.read()
+    with open("old.txt","r",) as a: # open(filename, mode) <=> open(<string>, <string>) <=> open("(x of A*)", ("[r|a|w|x] [e|b|t]")) with A being the alphabet, so A* the amount of all words over that alphabet
+        letter1 = a.read()
         a.close()
-except FileNotFoundError:
+except FileNotFoundError: # on FileNotFoundError indeted codeblock will be executed
     letter1 = None
     print("failure: old.txt not recognized")
 
