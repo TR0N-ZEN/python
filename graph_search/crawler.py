@@ -1,11 +1,13 @@
 from Graph import *
 
-
-def crawl(graph, start, end, permitted_waypoints):
-    if start == end: return "FOUND"
-    for edge in graph.edges:
-        if edge.start == end: 
-            crawl(graph, edge.start, permitted_waypoints)
+costs = []
+def crawl(graph, start, end, permitted_waypoints, already_visited, cost):
+    if start == end:
+        costs.append(cost)
+    else:
+        for edge in graph.edges:
+            if edge.start == start and permitted_waypoints.count(edge.end) == 1 and already_visited.count(edge.end) == 0:
+                crawl(graph, edge.end, end, permitted_waypoints, already_visited + [edge.end], cost + edge.cost)
 
 ############################################################
 vertexes = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -23,3 +25,7 @@ graph1 = Graph()
 graph1.vertexes = vertexes
 for edge in edges:
     graph1.edges.append(Edge(edge[0], edge[2], edge[1])) # Edge(start, end, cost)
+
+
+crawl(graph1, "1", "7", graph1.vertexes, ["1"], 0)
+print(costs)
