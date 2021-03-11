@@ -1,0 +1,6 @@
+{
+	"editor.minimap.side": "left",
+	"editor.renderControlCharacters": true,
+	"editor.renderIndentGuides": false,
+	"editor.renderWhitespace": "none"
+}
