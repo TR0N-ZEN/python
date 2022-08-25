@@ -1,6 +1,6 @@
 {
 	"editor.minimap.side": "left",
-	"editor.renderControlCharacters": true,
-	"editor.renderIndentGuides": false,
-	"editor.renderWhitespace": "none"
+  "editor.renderControlCharacters": true,
+  "editor.renderWhitespace": "none",
+  "editor.guides.indentation": false
 }
