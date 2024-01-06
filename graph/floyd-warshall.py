@@ -1,11 +1,11 @@
-from Graph import *
+from Graph import Graph, Edge
 from Matrix import Matrix
 
 graph = Graph()
-############################################################
 vertexes = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 edges = [
-            ("1", 2, "2"), ("1", 4, "6"), ("1", 12, "7"), # (<start_node>, <int>, <end_node>)
+            # (<start_node>, <int>, <end_node>)
+            ("1", 2, "2"), ("1", 4, "6"), ("1", 12, "7"),
             ("2", 10, "3"), ("2", 9, "7"),
             ("3", 2, "4"),
             ("4", 1, "5"),
@@ -16,7 +16,7 @@ edges = [
         ]
 graph.vertexes = vertexes
 for edge in edges:
-    graph.edges.append(Edge(edge[0], edge[2], edge[1])) # Edge(start, end, cost)
+    graph.edges.append(Edge(edge[0], edge[2], edge[1]))
 matrix = Matrix(len(graph.vertexes), len(graph.vertexes))
 
 for row in range(len(graph.vertexes)):
@@ -26,3 +26,4 @@ for row in range(len(graph.vertexes)):
         print(matrix.entry(row, column))
 
 Matrix.print(matrix)
+
