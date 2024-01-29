@@ -1,13 +1,16 @@
+
+# import the stuff done in singleton.py in the same folder as this file
 import singleton
 print(singleton.x+"\n"+singleton.y+"\n"+singleton.z+"\n")
 
-set1 = {1, 2, "3"}  # unordered, unindexed, no-duplicates, unchangable (engl.: set - de.: Menge);
+set1 = {1, 2, "3"}
+# unordered, unindexed, no-duplicates, unchangable (engl.: set - de.: Menge);
 # has methods
 # m1.union(m2) - "Vereinigung",
 # m1.intersection(m2) - "Schnitt"
 # m1.symmetric_difference(m2) - "Symetrische Different" and more
 
-list1 = [1, 2, "4"]  # ordered, indexed, duplicates, changable; equivalent to an array
+list1 = [1, 2, "4"]  # ordered, indexed, duplicates, changable
 tuple1 = ("1", 2, "3")  # ordered, indexed, duplicates, unchangable
 dictonary1 = {  # unordered, indexed, no-duplicates, changable
     "key1": 3,
@@ -25,8 +28,9 @@ class Vehicle:
 
 
 class Car(Vehicle):
+    # equivalent to 'super().__init__(self, terrain)'
     def __init__(self, terrain, propulsion):
-        Vehicle.__init__(self, terrain)  # equivalent to 'super().__init(self, terrain)'
+        Vehicle.__init__(self, terrain)
         self.propulsion = propulsion
 
 

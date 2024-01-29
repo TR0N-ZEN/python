@@ -25,4 +25,3 @@ except:
     with open("new.txt", "x") as b:
         b.write(letter1)
 print("everything should have went well")
-
