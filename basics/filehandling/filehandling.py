@@ -10,7 +10,11 @@ the following except blocks are executed if
 the error matches the type of error occured in the try block
 """
 try:
-    # open(filename , mode) open(<string>, <string>) <=> open("(x of A*)", ("[r|a|w|x] [e|b|t]")) with A being the alphabet, so A* the amount of all words over that alphabet
+    """
+     open(filename , mode)
+     open(<string>, <string>)
+     open("[a-Z]*", "[r|a|w|x][e|b|t]"))
+    """
     with open("old.txt", "r") as a:
         letter1 = a.read()
         a.close()
@@ -21,7 +25,7 @@ except FileNotFoundError:
 try:
     with open("new.txt", "w") as b:
         b.write(letter1)
-except:
+except FileNotFoundError:
     with open("new.txt", "x") as b:
         b.write(letter1)
 print("everything should have went well")

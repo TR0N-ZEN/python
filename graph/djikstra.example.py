@@ -1,7 +1,8 @@
-from Graph import Graph, Edge
-from Matrix import Matrix
+import Edge
+import Graph
+import djikstra
 
-graph = Graph()
+
 vertexes = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 edges = [
             # (<start_node>, <int>, <end_node>)
@@ -14,15 +15,17 @@ edges = [
             ("8", 9, "5"), ("8", 1, "9"),
             ("9", 4, "3"), ("9", 7, "4"), ("9", 3, "7")
         ]
-graph.vertexes = vertexes
+graph1 = Graph()
+graph1.vertexes = vertexes
 for edge in edges:
-    graph.edges.append(Edge(edge[0], edge[2], edge[1]))
-matrix = Matrix(len(graph.vertexes), len(graph.vertexes))
-
-for row in range(len(graph.vertexes)):
-    for column in range(len(graph.vertexes)):
-        value = f'{row}.{column}'
-        matrix.en .enter(value, row, column)
-        print(matrix.entry(row, column))
-
-Matrix.print(matrix)
+    graph1.edges.append(Edge(edge[0], edge[2], edge[1]))
+"""
+print(graph1.vertexes)
+for edge in graph1.edges:
+    print(edge.start + " " + edge.end + " " + str(edge.cost))
+"""
+paths = djikstra("1", graph1)
+"""
+for path in paths:
+    print_djikstra_tupel(path)
+"""
