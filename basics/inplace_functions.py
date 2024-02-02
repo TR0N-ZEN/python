@@ -5,12 +5,12 @@ print(len(a))
 
 a.append("z")
 
-print(len(a))
+print(len(a.copy()))
 
 a.reverse()
 
-print(a)
+print(ascii(a))
 
-b = a.reverse()
+a.reverse()
 
-print(b)
+print(ascii(a))
