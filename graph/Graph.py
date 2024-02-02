@@ -11,6 +11,7 @@ class Graph:
         self.edges = []  # (<x>, <int>, <x>) <=> (vertex_from, cost, vertex_to)
 
 
+# should maybe changed to be a list of edges
 class Path:
     def __init__(self, start, end, intersections):
         self.start = start

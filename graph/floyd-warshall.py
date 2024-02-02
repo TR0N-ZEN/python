@@ -1,3 +1,9 @@
+"""
+finds the cheapest path from each node to each other node
+TODO: implement floyd warshall algorithm
+"""
+
+
 from Graph import Graph, Edge
 from Matrix import Matrix
 

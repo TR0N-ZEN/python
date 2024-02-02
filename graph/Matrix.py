@@ -45,24 +45,22 @@ class Matrix:
         #         print(self.entry(row, column))
 
     def add(m1, m2):
-        if len(m1.row) == len(m2.row):
-            for row in range(len(m1.row)):
-                if len(m1.row[row]) != m2.row[row]:
-                    return "ERROR"
-        else:
-            return "ERROR"
+        if len(m1.row) != len(m2.row) or len(m2.row[0]) != len(m1.row[0]):
+            raise ValueError("matricies not of same shape")
         matrix = Matrix(len(m1.row), len(m1.row[0]))
         for row in range(len(m1.row)):
             for column in range(len(row)):
                 matrix.enter(
-                        m1.row[row][column]+m2.row[row][column],
-                        row,
-                        column)
+                      m1.row[row][column]
+                    + m2.row[row][column],
+                    row,
+                    column)
         return matrix
 
     def multiply(m1, m2):
         if m1.columns("amount") != m2.rows("amount"):
-            return "ERROR"
+            raise ValueError("number of colums of first and of rows \
+                             of second argument are unequal")
         matrix = Matrix(m1.rows("amount"), m2.columns("amount"))
         for i in m2.columns("amount"):  # i is a column variable for m2
             for k in m1.rows("amount"):  # k is a row variable for m1
@@ -71,4 +69,4 @@ class Matrix:
                 for j in range(m2.rows("amount")):
                     sum += m1.entry(k, j)*m2.entry(j, i)
                 matrix.enter(sum, k, i)  # for every column in m2 there will be
-
+        return matrix
