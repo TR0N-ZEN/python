@@ -51,13 +51,6 @@ plt.savefig('function_plot.png', format='png', dpi=300)
 
 
 # README
-#
 # on your host machine run
-#   podman run --volume ~/git-repos/python/matplotlib/:/main --name matplotlib.python --rm -u nobody -it python bash
-#
-# then in the container run
-#   pip install matplotlib
-#   cd /main
-#   python 01.py
-#
+#   source ./main.sh
 # open the file named `function_plot.png` on your host machine
